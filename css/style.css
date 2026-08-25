@@ -11,3 +11,28 @@
 .topbar{border-bottom:0;min-height:46px}.topbar-inner{height:46px;font-weight:600;letter-spacing:.035em}.topbar-inner>span:first-child{letter-spacing:.08em}.header{background:rgba(255,255,255,.985);border-bottom:1px solid #e4e0d9}.nav{height:102px;gap:30px}.brand{display:flex;align-items:center;flex-shrink:0}.brand img{width:190px}.nav-links a{padding:38px 0}.map-link{display:inline-flex;margin-top:14px;color:var(--blue);font-size:11px;font-weight:700;border-bottom:1px solid var(--gold);padding-bottom:4px}.map-info .map-link{display:flex;width:max-content}.top-country{display:flex!important}.mobile-country{display:none!important}
 @media(max-width:900px){.nav{height:94px}.brand img{width:178px}.nav-links a{padding:18px 0}.nav-links{gap:18px}.topbar-inner{height:44px}.topbar{min-height:44px}}
 @media(max-width:680px){.topbar{display:block}.topbar-inner{height:38px;min-height:38px}.topbar-inner>span:first-child{font-size:9px;letter-spacing:.05em}.top-country{display:flex!important;font-size:8px}.tiny-flag{font-size:10px}.nav{height:78px}.brand img{width:155px}.nav-links{top:78px}.nav-links a{padding:12px}.map-link{font-size:10px}}
+
+/* Final visual refinements */
+.site-header .logo img, .logo img { max-height: 58px !important; width: auto !important; }
+.site-header, .main-header, .navbar, nav { min-height: 92px; }
+.site-header .nav-inner, .main-header .nav-inner, .navbar .container { min-height: 92px; }
+.btn, .button, button, .cta, a.btn, .enquire-btn {
+  border-radius: 14px !important;
+}
+
+/* Rosairo final header and button refinement */
+.header .nav{
+  height:104px !important;
+  min-height:104px !important;
+}
+.brand img{
+  width:138px !important;
+  max-height:58px !important;
+  object-fit:contain;
+}
+.nav-links a{
+  padding:40px 0 !important;
+}
+.blue-btn,.gold-btn,.outline-btn,.collection-link,.enquire-btn{
+  border-radius:10px !important;
+}
