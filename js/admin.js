@@ -1,0 +1,32 @@
+(() => {
+  const KEY='rosairoGemstones';
+  const categories = typeof CATEGORIES!=='undefined'?CATEGORIES:[];
+  const fallback = typeof GEMSTONES!=='undefined'?JSON.parse(JSON.stringify(GEMSTONES)):[];
+  let gems = load();
+  let imageBuffers={main:null,extra:[]};
+  const $=id=>document.getElementById(id);
+  function load(){try{const r=localStorage.getItem(KEY);if(r)return JSON.parse(r);}catch(e){} return JSON.parse(JSON.stringify(fallback));}
+  function save(){localStorage.setItem(KEY,JSON.stringify(gems)); renderList();}
+  function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+  function categoryName(id){return categories.find(c=>c.id===id)?.name||id;}
+  function fillCategories(selected=''){ $('category').innerHTML=categories.map(c=>`<option value="${esc(c.id)}" ${c.id===selected?'selected':''}>${esc(c.name)}</option>`).join(''); fillSubs(selected); }
+  function fillSubs(catId,selected=''){const cat=categories.find(c=>c.id===catId); $('subcategory').innerHTML=(cat?.subs||[]).map(s=>`<option value="${esc(s)}" ${s===selected?'selected':''}>${esc(s)}</option>`).join('');}
+  function renderList(){const q=$('search').value.toLowerCase();const list=gems.map((g,i)=>({...g,_i:i})).filter(g=>`${g.name} ${g.subcategory} ${g.origin}`.toLowerCase().includes(q));$('stoneList').innerHTML=list.length?list.map(g=>`<div class="stone-row" data-index="${g._i}"><div class="stone-row-top"><strong>${esc(g.name)}</strong><span class="status-badge ${g.status==='sold'?'sold':g.status==='hidden'?'hidden':''}">${g.status==='sold'?'Sold Out':g.status==='hidden'?'Hidden':'Visible'}</span></div><small>${esc(categoryName(g.category))} · ${esc(g.subcategory||'')} · ${esc(g.carat||'')}</small></div>`).join(''):`<div class="empty-admin">No gemstones found.</div>`;}
+  function clearForm(){ $('editIndex').value=''; $('formTitle').textContent='Add New Gemstone'; $('stoneForm').reset(); imageBuffers={main:null,extra:[]}; fillCategories(); $('mainPreview').innerHTML=''; $('extraPreview').innerHTML=''; $('deleteBtn').disabled=true; }
+  function edit(i){const g=gems[i]; if(!g)return; $('editIndex').value=i; $('formTitle').textContent='Edit Gemstone'; ['name','id','carat','origin','variety','weight','dimensions','shape','cut','colour','clarity','treatment','certification','price','status','video','description'].forEach(k=>$(k).value=g[k]||''); fillCategories(g.category); fillSubs(g.category,g.subcategory); imageBuffers={main:g.image||null,extra:(g.images||[]).filter(x=>x!==g.image)}; previewExisting(); $('deleteBtn').disabled=false; window.scrollTo({top:0,behavior:'smooth'}); }
+  function previewExisting(){ $('mainPreview').innerHTML=imageBuffers.main?`<img class="image-preview" src="${esc(imageBuffers.main)}">`:''; $('extraPreview').innerHTML=imageBuffers.extra.map(x=>`<img class="image-preview" src="${esc(x)}">`).join(''); }
+  function readImage(file,max=1400){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>{const img=new Image();img.onload=()=>{const scale=Math.min(1,max/Math.max(img.width,img.height));const c=document.createElement('canvas');c.width=Math.round(img.width*scale);c.height=Math.round(img.height*scale);c.getContext('2d').drawImage(img,0,0,c.width,c.height);resolve(c.toDataURL('image/jpeg',.82));};img.onerror=reject;img.src=r.result;};r.onerror=reject;r.readAsDataURL(file);});}
+  $('category').addEventListener('change',()=>fillSubs($('category').value));
+  $('search').addEventListener('input',renderList);
+  $('stoneList').addEventListener('click',e=>{const row=e.target.closest('.stone-row');if(row)edit(Number(row.dataset.index));});
+  $('newBtn').addEventListener('click',clearForm);
+  $('deleteBtn').addEventListener('click',()=>{const i=Number($('editIndex').value);if(!Number.isInteger(i))return;if(confirm('Delete this gemstone permanently from the manager?')){gems.splice(i,1);save();clearForm();}});
+  $('mainImage').addEventListener('change',async e=>{if(e.target.files[0]){imageBuffers.main=await readImage(e.target.files[0]);previewExisting();}});
+  $('extraImages').addEventListener('change',async e=>{imageBuffers.extra=[];for(const f of e.target.files)imageBuffers.extra.push(await readImage(f));previewExisting();});
+  $('stoneForm').addEventListener('submit',e=>{e.preventDefault();const i=$('editIndex').value;const g={id:$('id').value.trim().replace(/\s+/g,'-').toLowerCase(),name:$('name').value.trim(),category:$('category').value,subcategory:$('subcategory').value,carat:$('carat').value.trim(),origin:$('origin').value.trim(),variety:$('variety').value.trim(),weight:$('weight').value.trim(),dimensions:$('dimensions').value.trim(),shape:$('shape').value.trim(),cut:$('cut').value.trim(),colour:$('colour').value.trim(),clarity:$('clarity').value.trim(),treatment:$('treatment').value.trim(),certification:$('certification').value.trim(),price:$('price').value.trim()||'Contact for Price',status:$('status').value,image:imageBuffers.main||'assets/hero-gem.svg',images:[imageBuffers.main||'assets/hero-gem.svg',...imageBuffers.extra].filter(Boolean),video:$('video').value.trim(),description:$('description').value.trim()}; if(i==='')gems.push(g);else gems[Number(i)]=g;save();alert('Gemstone saved. It is now available in this browser preview. Export Website Data when you are ready to publish it.');edit(gems.indexOf(g));});
+  $('exportBtn').addEventListener('click',()=>{const text=`/* Generated by Rosairo Gemstone Manager. Replace js/gemstone-data.js with this file. */\nconst GEMSTONES = ${JSON.stringify(gems,null,2)};\n\nconst CATEGORIES = ${JSON.stringify(categories,null,2)};\n`;const blob=new Blob([text],{type:'text/javascript'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='gemstone-data.js';a.click();URL.revokeObjectURL(a.href);});
+  $('importBtn').addEventListener('click',()=>$('importFile').click());
+  $('importFile').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(!Array.isArray(d))throw Error();gems=d;save();clearForm();alert('Data imported successfully.');}catch(err){alert('Invalid gemstone JSON file.');}};r.readAsText(f);e.target.value='';});
+  $('resetBtn').addEventListener('click',()=>{if(confirm('Remove local manager changes and return to the website starter data?')){localStorage.removeItem(KEY);gems=load();clearForm();renderList();}});
+  fillCategories();clearForm();renderList();
+})();

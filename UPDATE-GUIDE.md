@@ -1,23 +1,22 @@
-# Rosairo Gems — Easy Collection Update Guide
+# Rosairo Gems — Step 5 Gemstone Manager
 
-The gemstone catalogue is controlled from `js/gemstone-data.js`.
+## Open the manager
+Open `admin.html` on your website (for a live site: `/admin.html`).
 
-## Add a new gemstone
-1. Put the stone photo(s) in `assets/gems/`.
-2. Open `js/gemstone-data.js`.
-3. Copy an existing gemstone object.
-4. Change the `id`, `name`, `category`, `subcategory`, carat, origin, treatment, etc.
-5. Set `image` and `images` to your new photo paths, for example:
-   `assets/gems/royal-blue-01.jpg`
-6. Optional: add an MP4 path to `video`.
-7. Save and publish the project.
+## Add / edit / hide / sold / delete
+1. Click **New Gemstone** to add a stone.
+2. Select a stone from the left list to edit it.
+3. Use **Status**: Available / Visible, Sold Out, or Hidden.
+4. **Delete Selected** permanently removes it from the manager data.
+5. Image uploads are resized in the browser and saved into the manager data.
 
-The collection cards, filters and individual stone detail page read this data automatically.
+## Publish changes
+This is a static HTML/CSS/JS website, so the manager cannot directly write files to GitHub or Netlify. Changes are saved in the current browser for preview.
 
-## Main categories
-- Ceylon Sapphire
-- Other Gemstones
-- Calibrated Sapphires
-- Jewellery
+When ready to publish:
+1. Click **Export Website Data** in `admin.html`.
+2. A `gemstone-data.js` file downloads.
+3. Replace the existing `js/gemstone-data.js` with the downloaded file.
+4. Upload/commit the changed file to GitHub/Netlify.
 
-This is a static-site update system: changes are made in the data file and then the updated files are published to GitHub Pages/Netlify.
+The public collection automatically reads the manager data when it is present in the same browser, so you can preview changes before publishing.

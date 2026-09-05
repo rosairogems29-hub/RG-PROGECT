@@ -1,14 +1,5 @@
-# Rosairo Gems & Lapidary — Website
+# Rosairo Gems & Lapidary — Step 6
 
-## Easy updates
-Normal gemstone updates are made in `js/gemstone-data.js`.
+This version completes and polishes the About Us, News & Events and Gallery pages while preserving the current header, logo, contact details, Google Maps location and Gem Manager.
 
-- Add a new object to `GEMSTONES`.
-- Put the gemstone image in `assets/gems/`.
-- Change the object's `image` path.
-- Set category/subcategory and specifications.
-
-Category pages are in `pages/` and the stone detail page is `pages/stone.html`.
-
-## Hosting
-This is a static HTML/CSS/JavaScript site. It can be hosted directly on GitHub Pages or Netlify. No build command is required.
+Next phase: connect the Gem Manager to a real database/backend so stones can be added, edited, hidden, marked sold out and deleted without manually updating GitHub files.
