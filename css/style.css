@@ -44,3 +44,46 @@
 .about-list{margin:1.25rem 0 1.5rem;padding-left:1.25rem;display:grid;gap:.55rem;color:var(--muted,#5d6572)}
 .about-list li{padding-left:.2rem}
 .about-list strong{color:inherit}
+
+/* Wide Rosairo Gems & Lapidary header logo */
+.header .nav{
+  height:96px !important;
+  min-height:96px !important;
+  gap:24px;
+}
+.header .brand{
+  display:flex;
+  align-items:center;
+  flex:0 0 auto;
+}
+.header .brand img{
+  width:310px !important;
+  max-width:310px !important;
+  max-height:72px !important;
+  height:auto !important;
+  object-fit:contain;
+  display:block;
+}
+.header .nav-links{
+  gap:22px;
+}
+.header .nav-links a{
+  padding:36px 0 !important;
+}
+.footer-logo{
+  width:250px !important;
+  max-width:100%;
+  height:auto;
+}
+@media(max-width:1100px){
+  .header .brand img{width:265px !important;max-width:265px !important;}
+  .header .nav-links{gap:15px;font-size:11px;}
+  .header .nav{gap:16px;}
+}
+@media(max-width:680px){
+  .header .nav{height:76px !important;min-height:76px !important;}
+  .header .brand img{width:235px !important;max-width:235px !important;max-height:58px !important;}
+  .header .nav-links{top:76px;}
+  .header .nav-links a{padding:12px !important;}
+  .footer-logo{width:220px !important;}
+}
