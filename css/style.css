@@ -87,3 +87,45 @@
   .header .nav-links a{padding:12px !important;}
   .footer-logo{width:220px !important;}
 }
+
+/* Home page: slow right-to-left lapidary image showcase */
+.home-image-scroll{
+  width:min(760px,100%);
+  margin-top:34px;
+  overflow:hidden;
+  border:1px solid rgba(20,45,90,.12);
+  background:rgba(255,255,255,.88);
+  box-shadow:0 12px 35px rgba(20,45,90,.08);
+}
+.home-image-track{
+  display:flex;
+  width:max-content;
+  animation:rosairoHomeScroll 36s linear infinite;
+  will-change:transform;
+}
+.home-scroll-item{
+  width:250px;
+  height:155px;
+  flex:0 0 250px;
+  padding:7px;
+  background:#fff;
+}
+.home-scroll-item img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+}
+@keyframes rosairoHomeScroll{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
+.home-image-scroll:hover .home-image-track{animation-play-state:paused}
+@media(prefers-reduced-motion:reduce){
+  .home-image-track{animation:none}
+}
+@media(max-width:680px){
+  .home-image-scroll{width:100%;margin-top:26px}
+  .home-scroll-item{width:210px;height:132px;flex-basis:210px}
+  .home-image-track{animation-duration:32s}
+}
