@@ -160,7 +160,7 @@
   position:absolute;
   inset:0;
   z-index:-2;
-  background:linear-gradient(90deg,rgba(255,255,255,.94) 0%,rgba(255,255,255,.79) 38%,rgba(255,255,255,.34) 67%,rgba(255,255,255,.08) 100%);
+  background:linear-gradient(90deg,rgba(255,255,255,.78) 0%,rgba(255,255,255,.62) 38%,rgba(255,255,255,.20) 67%,rgba(255,255,255,.04) 100%);
 }
 .home-hero .hero-content{
   position:relative;
@@ -241,7 +241,7 @@
 }
 @media(max-width:900px){
   .home-hero,.home-hero .hero-content{min-height:650px}
-  .hero-bg-overlay{background:linear-gradient(180deg,rgba(255,255,255,.76) 0%,rgba(255,255,255,.48) 45%,rgba(255,255,255,.14) 100%)}
+  .hero-bg-overlay{background:linear-gradient(180deg,rgba(255,255,255,.66) 0%,rgba(255,255,255,.38) 45%,rgba(255,255,255,.08) 100%)}
   .collection-category-grid{grid-template-columns:repeat(2,1fr) !important}
 }
 @media(max-width:680px){
@@ -251,7 +251,7 @@
   .hero-bg-slide:nth-child(2){background-position:center}
   .hero-bg-slide:nth-child(3){background-position:center}
   .hero-bg-slide:nth-child(4){background-position:center}
-  .hero-bg-overlay{background:linear-gradient(180deg,rgba(255,255,255,.80) 0%,rgba(255,255,255,.53) 48%,rgba(255,255,255,.20) 100%)}
+  .hero-bg-overlay{background:linear-gradient(180deg,rgba(255,255,255,.68) 0%,rgba(255,255,255,.40) 48%,rgba(255,255,255,.10) 100%)}
   .collection-category-tabs{
     margin-left:0;
     margin-right:0;
