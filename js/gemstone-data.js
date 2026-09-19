@@ -55,8 +55,8 @@ const GEMSTONES = [
 ];
 
 const CATEGORIES = [
- {id:'ceylon-sapphire', name:'Ceylon Sapphire', intro:'Natural Sri Lankan sapphires, individually presented with their own specifications.', subs:['Blue Sapphire','Padparadscha','Yellow Sapphire','Pink Sapphire','Star Sapphire','Fancy Sapphire','White Sapphire','Other Ceylon Sapphires']},
- {id:'other-gemstones', name:'Other Gemstones', intro:'Selected precious and semi-precious gemstones from Sri Lanka and beyond.', subs:['Ruby','Spinel','Garnet','Chrysoberyl','Cat’s Eye','Amethyst','Tourmaline','Emerald','Other Gemstones']},
- {id:'calibrated-sapphires', name:'Calibrated Sapphires', intro:'Precisely cut sapphires in standardized sizes and shapes for jewellery makers and trade clients.', subs:['Round','Oval','Cushion','Pear','Emerald Cut','Princess','Other Shapes']},
+ {id:'ceylon-sapphire', name:'Sapphire Single Stones', intro:'Natural Sri Lankan sapphires, individually presented with their own specifications.', subs:['Blue Sapphire','Padparadscha','Yellow Sapphire','Pink Sapphire','Star Sapphire','Fancy Sapphire','White Sapphire','Other Ceylon Sapphires']},
+ {id:'other-gemstones', name:'Other Gems', intro:'Selected precious and semi-precious gemstones from Sri Lanka and beyond.', subs:['Ruby','Spinel','Garnet','Chrysoberyl','Cat’s Eye','Amethyst','Tourmaline','Emerald','Other Gemstones']},
+ {id:'calibrated-sapphires', name:'Calibrated Sapphire', intro:'Precisely cut sapphires in standardized sizes and shapes for jewellery makers and trade clients.', subs:['Round','Oval','Cushion','Pear','Emerald Cut','Princess','Other Shapes']},
  {id:'jewellery', name:'Jewellery', intro:'Selected gemstone jewellery and future custom pieces.', subs:['Rings','Pendants','Earrings','Bracelets','Custom Jewellery']}
 ];

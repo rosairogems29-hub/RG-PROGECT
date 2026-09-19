@@ -50,4 +50,38 @@ function renderStone(){
 }
 function initNav(){const n=document.getElementById('nav'),b=document.getElementById('menuToggle');b?.addEventListener('click',()=>n.classList.toggle('mobile-open'));document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>n.classList.remove('mobile-open')));}
 function initCommon(){initNav();const y=document.getElementById('year');if(y)y.textContent=new Date().getFullYear();const w=document.getElementById('waPrimary');if(w)w.href=`https://wa.me/${WHATSAPP}`;}
-document.addEventListener('DOMContentLoaded',()=>{initCommon();renderCategoryPage();renderStone();});
+document.addEventListener('DOMContentLoaded',()=>{initCommon();renderCategoryPage();renderStone();initHomeHero();});
+
+function initHomeHero(){
+  const root=document.getElementById('heroBackground');
+  if(!root) return;
+  const slides=[...root.querySelectorAll('.hero-bg-slide')];
+  const indicators=[...document.querySelectorAll('#heroIndicators span')];
+  if(!slides.length) return;
+
+  const key='rosairoHomeHeroStateV2';
+  const interval=4500; // each image remains visible; transition itself is 1.5s
+  let state={index:0,at:Date.now()};
+  try{
+    const saved=JSON.parse(localStorage.getItem(key)||'null');
+    if(saved && Number.isFinite(saved.index) && Number.isFinite(saved.at)){
+      const elapsed=Math.max(0,Date.now()-saved.at);
+      state.index=(saved.index + Math.floor(elapsed/interval)) % slides.length;
+    }
+  }catch(e){}
+
+  let index=state.index;
+  const show=(i)=>{
+    slides.forEach((s,n)=>s.classList.toggle('active',n===i));
+    indicators.forEach((d,n)=>d.classList.toggle('active',n===i));
+  };
+  const save=()=>localStorage.setItem(key,JSON.stringify({index,at:Date.now()}));
+  show(index);
+  setInterval(()=>{
+    index=(index+1)%slides.length;
+    show(index);
+    save();
+  },interval);
+  window.addEventListener('beforeunload',save);
+}
+
